@@ -8,9 +8,10 @@ services:
     ports:
       - 0.0.0.0:8000:80
     environment:
-      JAEGER_ENDPOINT: 'http://tempo:14268'
+      JAEGER_AGENT_HOST: tempo
+      JAEGER_AGENT_PORT: '6831'
       JAEGER_TAGS: cluster=tns,namespace=tns
-      JAEGER_SAMPLER_TYPE: probabilistic
+      JAEGER_SAMPLER_TYPE: const
       JAEGER_SAMPLER_PARAM: 1
 
   app:
@@ -23,9 +24,10 @@ services:
     ports:
       - 0.0.0.0:8001:80
     environment:
-      JAEGER_ENDPOINT: 'http://tempo:14268'
+      JAEGER_AGENT_HOST: tempo
+      JAEGER_AGENT_PORT: '6831'
       JAEGER_TAGS: cluster=tns,namespace=tns
-      JAEGER_SAMPLER_TYPE: probabilistic
+      JAEGER_SAMPLER_TYPE: const
       JAEGER_SAMPLER_PARAM: 1
 
   loadgen:
@@ -38,9 +40,10 @@ services:
     ports:
       - 0.0.0.0:8002:80
     environment:
-      JAEGER_ENDPOINT: 'http://tempo:14268'
+      JAEGER_AGENT_HOST: tempo
+      JAEGER_AGENT_PORT: '6831'
       JAEGER_TAGS: cluster=tns,namespace=tns
-      JAEGER_SAMPLER_TYPE: probabilistic
+      JAEGER_SAMPLER_TYPE: const
       JAEGER_SAMPLER_PARAM: 1
 
   prometheus:

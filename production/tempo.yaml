@@ -8,6 +8,7 @@ distributor:
     jaeger:
       protocols:
         thrift_http:
+        thrift_compact:
 
 ingester:
   lifecycler:
