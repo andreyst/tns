@@ -26,4 +26,4 @@ scrape_configs:
     # scheme defaults to 'http'.
 
     static_configs:
-    - targets: ['app:80', 'db:80', 'loadgen:80', 'tempo:3100']
+    - targets: ['app:80', 'db:80', 'loadgen:80']

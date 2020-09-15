@@ -8,7 +8,7 @@ services:
     ports:
       - 0.0.0.0:8000:80
     environment:
-      JAEGER_AGENT_HOST: tempo
+      JAEGER_AGENT_HOST: jaeger
       JAEGER_AGENT_PORT: '6831'
       JAEGER_TAGS: cluster=tns,namespace=tns
       JAEGER_SAMPLER_TYPE: const
@@ -24,7 +24,7 @@ services:
     ports:
       - 0.0.0.0:8001:80
     environment:
-      JAEGER_AGENT_HOST: tempo
+      JAEGER_AGENT_HOST: jaeger
       JAEGER_AGENT_PORT: '6831'
       JAEGER_TAGS: cluster=tns,namespace=tns
       JAEGER_SAMPLER_TYPE: const
@@ -40,7 +40,7 @@ services:
     ports:
       - 0.0.0.0:8002:80
     environment:
-      JAEGER_AGENT_HOST: tempo
+      JAEGER_AGENT_HOST: jaeger
       JAEGER_AGENT_PORT: '6831'
       JAEGER_TAGS: cluster=tns,namespace=tns
       JAEGER_SAMPLER_TYPE: const
@@ -57,31 +57,7 @@ services:
     ports:
       - 0.0.0.0:8003:9090
 
-  tempo:
-    image: tempo:latest
-    command: ["-config.file=/etc/tempo.yaml"]
-    volumes:
-      - ./tempo.yaml:/etc/tempo.yaml
-      - /tmp/tempo:/tmp/tempo
+  jaeger:
+    image: jaegertracing/all-in-one:1.17
     ports:
-      - "8004:3100"  # tempo
-
-  minio:
-    image: minio/minio:RELEASE.2020-07-27T18-37-02Z
-    environment:
-      - MINIO_ACCESS_KEY=tempo
-      - MINIO_SECRET_KEY=supersecret
-    ports:
-      - "8005:9000"
-    entrypoint:
-      - sh
-      - -euc
-      - mkdir -p /data/tempo && /usr/bin/minio server /data
-
-  tempo-query:
-    image: tempo-query:latest
-    command: ["--grpc-storage-plugin.configuration-file=/etc/tempo-query.yaml"]
-    volumes:
-      - ./tempo-query.yaml:/etc/tempo-query.yaml
-    ports:
-      - "8006:16686"  # jaeger-ui
+      - "8004:16686"  # tempo
