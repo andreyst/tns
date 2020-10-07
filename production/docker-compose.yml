@@ -47,7 +47,7 @@ services:
       JAEGER_SAMPLER_PARAM: 1
 
   prometheus:
-    image: annanay25/prometheus-linux-amd64:pr-6635
+    image: cstyan/prometheus:exemplars-cd49a1
     volumes:
       - ./prometheus.yaml:/etc/prometheus/prometheus.yml
     links:
