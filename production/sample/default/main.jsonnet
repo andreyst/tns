@@ -53,6 +53,14 @@ prometheus + promtail + {
     },
   },
 
+  grafana_config:: {
+    sections: {
+      feature_toggles+: {
+        enable: 'traceToLogs',
+      },
+    },
+  },
+
   nginx_service+:
     service.mixin.spec.withType('ClusterIP') +
     service.mixin.spec.withPorts({
