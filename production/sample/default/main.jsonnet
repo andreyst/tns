@@ -85,6 +85,23 @@ prometheus + promtail + {
             },
           },
           {
+            name: 'exemplars',
+            type: 'prometheus',
+            access: 'proxy',
+            url: 'http://prometheus.default.svc.cluster.local/prometheus/',
+            isDefault: false,
+            version: 1,
+            editable: false,
+            basicAuth: false,
+            jsonData: {
+              httpMethod: 'GET',
+              exemplarTraceIDDestination: {
+                  name: 'traceID',
+                  url: 'http://localhost:8080/jaeger/trace/$${value}',
+              },
+            },
+          },
+          {
             name: 'Jaeger',
             type: 'jaeger',
             access: 'browser',
