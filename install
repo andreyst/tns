@@ -30,5 +30,6 @@ jb install               # Installs dependencies
 ## Install apps into separate namespaces
 install_env default # Install default monitoring stack
 install_env jaeger  # Install jaeger tracing app
+install_env tempo   # Install Tempo
 install_env loki    # Install loki logging app
 install_env tns     # Install TNS demo app
