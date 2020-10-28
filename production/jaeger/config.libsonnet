@@ -1,8 +1,8 @@
 {
- _config+:: {
-      namespace: 'jaeger',
-      jaeger+: {
-        replicas: 1,
-      },
+  _config+:: {
+    namespace: 'jaeger',
+    jaeger+: {
+      replicas: 1,
+    },
   },
 }
