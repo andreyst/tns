@@ -1,6 +1,13 @@
 version: "2"
 services:
 
+  grafana:
+    image: tomwilkie/grafana:exemplars-1
+    volumes:
+      - ./datasources.yaml:/etc/grafana/provisioning/datasources/datasources.yaml
+    ports:
+    - "3000:3000"
+
   db:
     image: grafana/tns-db
     command:
