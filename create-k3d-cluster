@@ -18,14 +18,14 @@ k3d cluster create $CLUSTER_NAME \
 
 echo -n 'creating'
 set +e
-while ! k3d get-kubeconfig --name=$CLUSTER_NAME >/dev/null 2>&1; do
+while ! k3d kubeconfig get $CLUSTER_NAME >/dev/null 2>&1; do
   sleep 1
   echo -n '.'
 done
 set -e
 echo 'done'
 
-export KUBECONFIG="$(k3d get-kubeconfig --name=$CLUSTER_NAME):$HOME/.kube/config"
+export KUBECONFIG="$(k3d kubeconfig get $CLUSTER_NAME):$HOME/.kube/config"
 kubectl apply -f https://raw.githubusercontent.com/rancher/local-path-provisioner/master/deploy/local-path-storage.yaml
 kubectl patch storageclass local-path -p '{"metadata":{"annotations":{"storageclass.kubernetes.io/is-default-class":"true"}}}'
 
